@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "851843923017",
+    "firebase_url": "https://bookreader-d94e3-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "bookreader-d94e3",
+    "storage_bucket": "bookreader-d94e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851843923017:android:c2de57349f5b9ff644d398",
+        "android_client_info": {
+          "package_name": "com.example.androidfirebasecomicreader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851843923017-fp9t83fpr4tg770478ch7gtmk8mee45i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClncRHK3EfjfLRF8WYDacKXPXwlHCe0og"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851843923017-fp9t83fpr4tg770478ch7gtmk8mee45i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

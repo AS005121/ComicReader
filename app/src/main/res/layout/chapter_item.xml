@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="80dp"
+    android:background="@android:color/white">
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/chaptersColor">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="8dp"
+            android:background="@color/chaptersColor">
+            <TextView
+                android:id="@+id/txt_chapter_numb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="CHAPTER 1"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:background="@color/chaptersColor"/>
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>
