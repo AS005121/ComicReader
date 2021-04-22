@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidfirebasecomicreader.Adapter.MyViewPagerAdapter;
 import com.example.androidfirebasecomicreader.Common.Common;
 import com.example.androidfirebasecomicreader.Model.Chapter;
 
@@ -31,11 +32,12 @@ public class ViewComicActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Common.chapterIndex == 0)
-                    Toast.makeText(ViewComicActivity.this, "You are reading first chapter", Toast.LENGTH_SHORT);
+                    Toast.makeText(ViewComicActivity.this, "You are reading first chapter", Toast.LENGTH_SHORT).show();
                 else
                 {
                     Common.chapterIndex--;
                     fetchLinks(Common.chapterList.get(Common.chapterIndex));
+
                 }
             }
         });
@@ -44,7 +46,7 @@ public class ViewComicActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(Common.chapterIndex == Common.chapterList.size() - 1)
-                    Toast.makeText(ViewComicActivity.this, "You are reading last chapter", Toast.LENGTH_SHORT);
+                    Toast.makeText(ViewComicActivity.this, "You are reading last chapter", Toast.LENGTH_SHORT).show();
                 else
                 {
                     Common.chapterIndex++;
@@ -59,5 +61,22 @@ public class ViewComicActivity extends AppCompatActivity {
 
 
     private void fetchLinks(Chapter chapter) {
+        if(chapter.Links != null)
+        {
+            if(chapter.Links.size() > 0)
+            {
+                MyViewPagerAdapter adapter = new MyViewPagerAdapter(getBaseContext(), chapter.Links);
+                viewPager.setAdapter(adapter);
+
+                txt_chapter_name.setText(Common.formatString(chapter.Name));
+            }
+            else{
+                Toast.makeText(this, "No image here", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        else{
+            Toast.makeText(this, "This chapter is translating...", Toast.LENGTH_SHORT).show();
+        }
     }
 }

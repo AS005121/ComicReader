@@ -25,6 +25,7 @@ public class MyComicAdapter extends RecyclerView.Adapter<MyComicAdapter.MyViewHo
     Context context;
     List<Book> comicList;
     LayoutInflater inflater;
+    TextView txt_chapter_name;
 
     public MyComicAdapter(Context context, List<Book> comicList){
         this.context = context;
