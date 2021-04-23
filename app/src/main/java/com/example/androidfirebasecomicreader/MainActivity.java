@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements IBannerLoadDone, 
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView recycler_comic;
     TextView txt_comic;
+    ImageView btn_filter_search;
+    Intent intent;
 
     //Database
     DatabaseReference banners;
@@ -60,6 +66,16 @@ public class MainActivity extends AppCompatActivity implements IBannerLoadDone, 
         //Init Listener
         bannerListener = this;
         comicListener = this;
+
+        btn_filter_search = (ImageView)findViewById(R.id.btn_show_filter_search);
+        btn_filter_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, FilterSearchActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
 
         slider = (Slider)findViewById(R.id.slider);
         Slider.init(new PicassoLoadingService());
