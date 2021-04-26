@@ -65,7 +65,7 @@ public class ViewComicActivity extends AppCompatActivity {
         {
             if(chapter.Links.size() > 0)
             {
-                MyViewPagerAdapter adapter = new MyViewPagerAdapter(getBaseContext(), chapter.Links);
+                MyViewPagerAdapter adapter = new MyViewPagerAdapter(ViewComicActivity.this, chapter.Links, chapter.Sound);
                 viewPager.setAdapter(adapter);
 
                 txt_chapter_name.setText(Common.formatString(chapter.Name));
@@ -73,7 +73,6 @@ public class ViewComicActivity extends AppCompatActivity {
             else{
                 Toast.makeText(this, "No image here", Toast.LENGTH_SHORT).show();
             }
-
         }
         else{
             Toast.makeText(this, "This chapter is translating...", Toast.LENGTH_SHORT).show();
