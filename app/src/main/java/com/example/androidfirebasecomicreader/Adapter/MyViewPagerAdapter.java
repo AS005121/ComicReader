@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.androidfirebasecomicreader.R;
@@ -20,12 +21,11 @@ import com.squareup.picasso.Picasso;
 import java.io.IOException;
 import java.util.List;
 
-public class MyViewPagerAdapter extends PagerAdapter {
+public class MyViewPagerAdapter extends PagerAdapter{
     Context context;
     List<String> imageLinks;
     List<String> soundLinks;
     LayoutInflater inflater;
-    int my = -1;
     String previousSound = "";
     String currentSound;
 
@@ -60,6 +60,13 @@ public class MyViewPagerAdapter extends PagerAdapter {
         PhotoView page_image = (PhotoView)image_layout.findViewById(R.id.page_image);
         Picasso.get().load(imageLinks.get(position)).into(page_image);
 
+        container.addView(image_layout);
+        return image_layout;
+    }
+
+    @Deprecated
+    @Override
+    public void setPrimaryItem(@NonNull View container, int position, @NonNull Object object) {
         currentSound = soundLinks.get(position);
         if(!previousSound.equals(currentSound)){
             if(mediaPlayer.isPlaying()){
@@ -85,20 +92,6 @@ public class MyViewPagerAdapter extends PagerAdapter {
             mediaPlayer.start();
             previousSound = currentSound;
         }
-
-        //Toast.makeText(context, Integer.toString(my), Toast.LENGTH_SHORT).show();
-        /*if(my == 0)
-        {
-            try {
-                mediaPlayer.setDataSource(soundLinks.get(3));
-                mediaPlayer.prepare();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            mediaPlayer.start();
-        }*/
-
-        container.addView(image_layout);
-        return image_layout;
     }
+
 }

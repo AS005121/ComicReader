@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.example.androidfirebasecomicreader.Adapter.MyChapterAdapter;
@@ -53,11 +54,15 @@ public class ChaptersActivity extends AppCompatActivity {
     }
 
     private void fetchChapter(Book comicSelected) {
-        Common.chapterList = comicSelected.Chapters;
-        recycler_chapter.setAdapter(new MyChapterAdapter(this, comicSelected.Chapters));
-        txt_chapter_name.setText(new StringBuilder("CHAPTERS (")
-                .append(comicSelected.Chapters.size())
-                .append(")"));
+        if(comicSelected.Chapters != null) {
+            Common.chapterList = comicSelected.Chapters;
+            recycler_chapter.setAdapter(new MyChapterAdapter(this, comicSelected.Chapters));
+            txt_chapter_name.setText(new StringBuilder("CHAPTERS (")
+                    .append(comicSelected.Chapters.size())
+                    .append(")"));
+        }else {
+            Toast.makeText(this, "No chapters yet...", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

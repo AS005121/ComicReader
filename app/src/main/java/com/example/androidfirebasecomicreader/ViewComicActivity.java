@@ -3,6 +3,7 @@ package com.example.androidfirebasecomicreader;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -17,6 +18,9 @@ public class ViewComicActivity extends AppCompatActivity {
     ViewPager viewPager;
     TextView txt_chapter_name;
     View back, next;
+    MyViewPagerAdapter adapter;
+
+   //MyViewPagerAdapter adapter = new MyViewPagerAdapter(ViewComicActivity.this, Common.chapterSelected.Links, Common.chapterSelected.Sound);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class ViewComicActivity extends AppCompatActivity {
         back = findViewById(R.id.chapter_back);
         next = findViewById(R.id.chapter_next);
 
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +41,7 @@ public class ViewComicActivity extends AppCompatActivity {
                 else
                 {
                     Common.chapterIndex--;
+
                     fetchLinks(Common.chapterList.get(Common.chapterIndex));
 
                 }
@@ -59,13 +65,24 @@ public class ViewComicActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        getDelegate().onStop();
+        if(adapter != null) {
+            adapter.mediaPlayer.stop();
+            adapter.mediaPlayer.release();
+            adapter.mediaPlayer = null;
+        }
+    }
+
 
     private void fetchLinks(Chapter chapter) {
-        if(chapter.Links != null)
+        if(chapter.Links != null && chapter.Sound != null)
         {
-            if(chapter.Links.size() > 0)
+            if(chapter.Links.size() > 0 && chapter.Sound.size() > 0)
             {
-                MyViewPagerAdapter adapter = new MyViewPagerAdapter(ViewComicActivity.this, chapter.Links, chapter.Sound);
+                adapter = new MyViewPagerAdapter(ViewComicActivity.this, chapter.Links, chapter.Sound);
                 viewPager.setAdapter(adapter);
 
                 txt_chapter_name.setText(Common.formatString(chapter.Name));
