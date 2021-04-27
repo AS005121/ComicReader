@@ -7,9 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="columnColor">#F6584C</color>
+    <color name="columnColor">#262D3A</color>
     <color name="textColor">#FEFEFE</color>
     <color name="chaptersColor">#F4F4F4</color>
-    <color name="customBlack">#333333</color>
-    <color name="alphaCustomBlack">#A9333333</color>
+    <color name="customBlack">#FFBB86FC</color>
+    <color name="alphaCustomBlack">#A8262D3A</color>
+    <color name="columnColorLighter">#323A4A</color>
 </resources>

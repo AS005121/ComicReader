@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidfirebasecomicreader.Common.Common;
 import com.example.androidfirebasecomicreader.Interface.IRecyclerItemClickListener;
 import com.example.androidfirebasecomicreader.Model.Chapter;
+import com.example.androidfirebasecomicreader.Model.Script;
 import com.example.androidfirebasecomicreader.R;
 import com.example.androidfirebasecomicreader.ViewComicActivity;
 
@@ -21,11 +22,13 @@ import java.util.List;
 public class MyChapterAdapter extends RecyclerView.Adapter<MyChapterAdapter.MyViewHolder> {
     Context context;
     List<Chapter> chapterList;
+    List<Script> scriptList;
     LayoutInflater inflater;
 
-    public MyChapterAdapter(Context context, List<Chapter> chapterList){
+    public MyChapterAdapter(Context context, List<Chapter> chapterList, List<Script> scriptList){
         this.context = context;
         this.chapterList = chapterList;
+        this.scriptList = scriptList;
         inflater = LayoutInflater.from(context);
     }
 
@@ -45,6 +48,7 @@ public class MyChapterAdapter extends RecyclerView.Adapter<MyChapterAdapter.MyVi
             @Override
             public void onClick(View view, int position) {
                 Common.chapterSelected = chapterList.get(position);
+                Common.scriptSelected = scriptList.get(position);
                 Common.chapterIndex = position;
                 Intent intent = new Intent(context, ViewComicActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

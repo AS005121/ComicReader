@@ -2,6 +2,7 @@ package com.example.androidfirebasecomicreader.Common;
 
 import com.example.androidfirebasecomicreader.Model.Book;
 import com.example.androidfirebasecomicreader.Model.Chapter;
+import com.example.androidfirebasecomicreader.Model.Script;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,9 @@ public class Common {
     public static List<Book> comicList = new ArrayList<>();
     public static Book comicSelected;
     public static List<Chapter> chapterList;
+    public static List<Script> scriptList;
     public static Chapter chapterSelected;
+    public static Script scriptSelected;
     public static int chapterIndex = -1;
 
     public static String formatString(String name) {

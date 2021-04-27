@@ -12,6 +12,10 @@ import android.widget.Toast;
 import com.example.androidfirebasecomicreader.Adapter.MyViewPagerAdapter;
 import com.example.androidfirebasecomicreader.Common.Common;
 import com.example.androidfirebasecomicreader.Model.Chapter;
+import com.example.androidfirebasecomicreader.Model.Script;
+import com.mollin.yapi.YeelightDevice;
+import com.mollin.yapi.exception.YeelightResultErrorException;
+import com.mollin.yapi.exception.YeelightSocketException;
 
 public class ViewComicActivity extends AppCompatActivity {
 
@@ -19,8 +23,6 @@ public class ViewComicActivity extends AppCompatActivity {
     TextView txt_chapter_name;
     View back, next;
     MyViewPagerAdapter adapter;
-
-   //MyViewPagerAdapter adapter = new MyViewPagerAdapter(ViewComicActivity.this, Common.chapterSelected.Links, Common.chapterSelected.Sound);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class ViewComicActivity extends AppCompatActivity {
                     Common.chapterIndex--;
 
                     fetchLinks(Common.chapterList.get(Common.chapterIndex));
+                    //startScript(Common.scriptList.get(Common.chapterIndex));
 
                 }
             }
@@ -57,11 +60,13 @@ public class ViewComicActivity extends AppCompatActivity {
                 {
                     Common.chapterIndex++;
                     fetchLinks(Common.chapterList.get(Common.chapterIndex));
+                    //startScript(Common.scriptList.get(Common.chapterIndex));
                 }
             }
         });
 
         fetchLinks(Common.chapterSelected);
+        //startScript(Common.scriptSelected);
 
     }
 
@@ -94,5 +99,13 @@ public class ViewComicActivity extends AppCompatActivity {
         else{
             Toast.makeText(this, "This chapter is translating...", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void startScript(Script script){
+        /*if(script.Script != null) {
+            Toast.makeText(this, script.Script, Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "No Script yet...", Toast.LENGTH_SHORT).show();
+        }*/
     }
 }

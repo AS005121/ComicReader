@@ -56,7 +56,7 @@ public class ChaptersActivity extends AppCompatActivity {
     private void fetchChapter(Book comicSelected) {
         if(comicSelected.Chapters != null) {
             Common.chapterList = comicSelected.Chapters;
-            recycler_chapter.setAdapter(new MyChapterAdapter(this, comicSelected.Chapters));
+            recycler_chapter.setAdapter(new MyChapterAdapter(this, comicSelected.Chapters, comicSelected.LampScript));
             txt_chapter_name.setText(new StringBuilder("CHAPTERS (")
                     .append(comicSelected.Chapters.size())
                     .append(")"));
