@@ -43,10 +43,15 @@ public class ViewComicActivity extends AppCompatActivity {
                 else
                 {
                     Common.chapterIndex--;
-
+                    if(adapter != null) {
+                        adapter.mediaPlayer.stop();
+                        adapter.mediaPlayer.release();
+                        adapter.mediaPlayer = null;
+                        adapter = null;
+                    }
                     fetchLinks(Common.chapterList.get(Common.chapterIndex));
-                    //startScript(Common.scriptList.get(Common.chapterIndex));
-
+                    if(Common.scriptList != null)
+                        startScript(Common.scriptList.get(Common.chapterIndex));
                 }
             }
         });
@@ -54,19 +59,27 @@ public class ViewComicActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Common.chapterIndex == Common.chapterList.size() - 1)
+                if(Common.chapterIndex == Common.chapterList.size() - 1) {
                     Toast.makeText(ViewComicActivity.this, "You are reading last chapter", Toast.LENGTH_SHORT).show();
-                else
-                {
+                }
+                else{
                     Common.chapterIndex++;
+                    if(adapter != null) {
+                        adapter.mediaPlayer.stop();
+                        adapter.mediaPlayer.release();
+                        adapter.mediaPlayer = null;
+                        adapter = null;
+                    }
                     fetchLinks(Common.chapterList.get(Common.chapterIndex));
-                    //startScript(Common.scriptList.get(Common.chapterIndex));
+                    if(Common.scriptList != null)
+                        startScript(Common.scriptList.get(Common.chapterIndex));
                 }
             }
         });
 
         fetchLinks(Common.chapterSelected);
-        //startScript(Common.scriptSelected);
+        if(Common.scriptSelected != null)
+            startScript(Common.scriptSelected);
 
     }
 
@@ -85,7 +98,7 @@ public class ViewComicActivity extends AppCompatActivity {
     private void fetchLinks(Chapter chapter) {
         if(chapter.Links != null && chapter.Sound != null)
         {
-            if(chapter.Links.size() > 0 && chapter.Sound.size() > 0)
+            if(chapter.Links.size() > 0 && chapter.Sound.size() > 0 && adapter == null)
             {
                 adapter = new MyViewPagerAdapter(ViewComicActivity.this, chapter.Links, chapter.Sound);
                 viewPager.setAdapter(adapter);
@@ -97,15 +110,16 @@ public class ViewComicActivity extends AppCompatActivity {
             }
         }
         else{
+            txt_chapter_name.setText(Common.formatString(chapter.Name));
             Toast.makeText(this, "This chapter is translating...", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void startScript(Script script){
-        /*if(script.Script != null) {
+        if(script.Script != null) {
             Toast.makeText(this, script.Script, Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(this, "No Script yet...", Toast.LENGTH_SHORT).show();
-        }*/
+        }
     }
 }

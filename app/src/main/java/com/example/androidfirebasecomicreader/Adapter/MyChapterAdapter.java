@@ -47,8 +47,11 @@ public class MyChapterAdapter extends RecyclerView.Adapter<MyChapterAdapter.MyVi
         myViewHolder.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
             @Override
             public void onClick(View view, int position) {
+                if(scriptList != null)
+                    Common.scriptSelected = scriptList.get(position);
+                else
+                    Common.scriptSelected = null;
                 Common.chapterSelected = chapterList.get(position);
-                Common.scriptSelected = scriptList.get(position);
                 Common.chapterIndex = position;
                 Intent intent = new Intent(context, ViewComicActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
