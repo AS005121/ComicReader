@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidfirebasecomicreader.Adapter.MyLampAdapter;
 import com.example.androidfirebasecomicreader.Adapter.MyViewPagerAdapter;
 import com.example.androidfirebasecomicreader.Common.Common;
 import com.example.androidfirebasecomicreader.Model.Chapter;
@@ -23,6 +24,8 @@ public class ViewComicActivity extends AppCompatActivity {
     TextView txt_chapter_name;
     View back, next;
     MyViewPagerAdapter adapter;
+    MyLampAdapter lamp;
+    Thread threadLamp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,11 @@ public class ViewComicActivity extends AppCompatActivity {
                         adapter.mediaPlayer = null;
                         adapter = null;
                     }
+                    if(lamp != null){
+                        lamp.isWork = false;
+                        //lamp.device = null;
+                        //lamp = null;
+                    }
                     fetchLinks(Common.chapterList.get(Common.chapterIndex));
                     if(Common.scriptList != null)
                         startScript(Common.scriptList.get(Common.chapterIndex));
@@ -69,6 +77,11 @@ public class ViewComicActivity extends AppCompatActivity {
                         adapter.mediaPlayer.release();
                         adapter.mediaPlayer = null;
                         adapter = null;
+                    }
+                    if(lamp != null){
+                        lamp.isWork = false;
+                        //lamp.device = null;
+                        //lamp = null;
                     }
                     fetchLinks(Common.chapterList.get(Common.chapterIndex));
                     if(Common.scriptList != null)
@@ -92,6 +105,19 @@ public class ViewComicActivity extends AppCompatActivity {
             adapter.mediaPlayer.release();
             adapter.mediaPlayer = null;
         }
+        if(lamp != null){
+            lamp.isWork = false;
+            //lamp.device = null;
+            lamp = null;
+        }
+    }
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        getDelegate().onPostResume();
+
     }
 
 
@@ -117,7 +143,17 @@ public class ViewComicActivity extends AppCompatActivity {
 
     private void startScript(Script script){
         if(script.Script != null) {
+            if(lamp == null)
+                lamp = new MyLampAdapter();
+            else
+                lamp.isWork = true;
             Toast.makeText(this, script.Script, Toast.LENGTH_SHORT).show();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    lamp.setMorningMode();
+                }
+            }).start();
         }else {
             Toast.makeText(this, "No Script yet...", Toast.LENGTH_SHORT).show();
         }

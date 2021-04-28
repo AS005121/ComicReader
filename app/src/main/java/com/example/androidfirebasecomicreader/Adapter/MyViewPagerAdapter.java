@@ -63,18 +63,6 @@ public class MyViewPagerAdapter extends PagerAdapter{
         PhotoView page_image = (PhotoView)image_layout.findViewById(R.id.page_image);
         Picasso.get().load(imageLinks.get(position)).into(page_image);
 
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    YeelightDevice device = new YeelightDevice("192.168.100.117");
-                    device.setPower(true);
-                } catch (YeelightSocketException | YeelightResultErrorException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();*/
-
         container.addView(image_layout);
         return image_layout;
     }
