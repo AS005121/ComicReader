@@ -47,7 +47,7 @@ public class MyChapterAdapter extends RecyclerView.Adapter<MyChapterAdapter.MyVi
         myViewHolder.setRecyclerItemClickListener(new IRecyclerItemClickListener() {
             @Override
             public void onClick(View view, int position) {
-                if(scriptList != null)
+                if(scriptList != null && position < scriptList.size())
                     Common.scriptSelected = scriptList.get(position);
                 else
                     Common.scriptSelected = null;

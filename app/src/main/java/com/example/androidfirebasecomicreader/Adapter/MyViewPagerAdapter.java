@@ -39,7 +39,6 @@ public class MyViewPagerAdapter extends PagerAdapter{
         this.imageLinks = imageLinks;
         this.soundLinks = soundLinks;
         inflater = LayoutInflater.from(context);
-
     }
 
     @Override
@@ -70,30 +69,35 @@ public class MyViewPagerAdapter extends PagerAdapter{
     @Deprecated
     @Override
     public void setPrimaryItem(@NonNull View container, int position, @NonNull Object object) {
-        currentSound = soundLinks.get(position);
-        if(!previousSound.equals(currentSound)){
-            if(mediaPlayer.isPlaying()){
-                mediaPlayer.stop();
-                mediaPlayer.release();
-                mediaPlayer = null;
-                try {
-                    mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource(currentSound);
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }else {
-                try {
-                    mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource(currentSound);
-                    mediaPlayer.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if (soundLinks != null) {
+            if (position < soundLinks.size()) {
+                currentSound = soundLinks.get(position);
+                if (!previousSound.equals(currentSound)) {
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
+                        try {
+                            mediaPlayer = new MediaPlayer();
+                            mediaPlayer.setDataSource(currentSound);
+                            mediaPlayer.prepare();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            mediaPlayer = new MediaPlayer();
+                            mediaPlayer.setDataSource(currentSound);
+                            mediaPlayer.prepare();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    mediaPlayer.setLooping(true);
+                    mediaPlayer.start();
+                    previousSound = currentSound;
                 }
             }
-            mediaPlayer.start();
-            previousSound = currentSound;
         }
     }
 }

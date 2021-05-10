@@ -10,6 +10,5 @@ public class Book {
     public List<Script> LampScript;
 
     public Book() {
-
     }
 }

@@ -21,15 +21,14 @@ public class MyLampAdapter implements LampScriptsLoad {
         try {
             if(device == null)
                 device = new YeelightDevice(ip);
-
             device.setPower(true);
             while (isWork){
                 device.setRGB(238, 255, 0);
                 //device.setBrightness(100);
-                Thread.sleep(1500);
+                Thread.sleep(2000);
                 device.setRGB(128, 0, 255);
                 //device.setBrightness(75);
-                Thread.sleep(1500);
+                Thread.sleep(2000);
             }
         } catch (YeelightSocketException | YeelightResultErrorException | InterruptedException e) {
             e.printStackTrace();

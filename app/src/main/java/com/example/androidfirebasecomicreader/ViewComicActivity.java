@@ -58,7 +58,7 @@ public class ViewComicActivity extends AppCompatActivity {
                         //lamp = null;
                     }
                     fetchLinks(Common.chapterList.get(Common.chapterIndex));
-                    if(Common.scriptList != null)
+                    if(Common.scriptList != null && Common.chapterIndex < Common.scriptList.size())
                         startScript(Common.scriptList.get(Common.chapterIndex));
                 }
             }
@@ -84,7 +84,7 @@ public class ViewComicActivity extends AppCompatActivity {
                         //lamp = null;
                     }
                     fetchLinks(Common.chapterList.get(Common.chapterIndex));
-                    if(Common.scriptList != null)
+                    if(Common.scriptList != null && Common.chapterIndex < Common.scriptList.size())
                         startScript(Common.scriptList.get(Common.chapterIndex));
                 }
             }
@@ -122,9 +122,9 @@ public class ViewComicActivity extends AppCompatActivity {
 
 
     private void fetchLinks(Chapter chapter) {
-        if(chapter.Links != null && chapter.Sound != null)
+        if(chapter.Links != null)
         {
-            if(chapter.Links.size() > 0 && chapter.Sound.size() > 0 && adapter == null)
+            if(chapter.Links.size() > 0 && adapter == null)
             {
                 adapter = new MyViewPagerAdapter(ViewComicActivity.this, chapter.Links, chapter.Sound);
                 viewPager.setAdapter(adapter);
@@ -147,7 +147,7 @@ public class ViewComicActivity extends AppCompatActivity {
                 lamp = new MyLampAdapter();
             else
                 lamp.isWork = true;
-            Toast.makeText(this, script.Script, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, script.Script, Toast.LENGTH_SHORT).show();
             new Thread(new Runnable() {
                 @Override
                 public void run() {
